@@ -1,0 +1,4723 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pagoda.eshop.goods.dao.gcard.GcardPageMapper">
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wxPageId" jdbcType="VARCHAR" property="wxPageId" />
+    <result column="themeId" jdbcType="BIGINT" property="themeId" />
+    <result column="pageTitle" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="bannerPicUrl" jdbcType="VARCHAR" property="bannerPicUrl" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="servicePhone" jdbcType="VARCHAR" property="servicePhone" />
+    <result column="bizDescription" jdbcType="VARCHAR" property="bizDescription" />
+    <result column="supportBuyForSelf" jdbcType="VARCHAR" property="supportBuyForSelf" />
+    <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt" />
+    <result column="cellTitle1" jdbcType="VARCHAR" property="cellTitle1" />
+    <result column="cellUrl1" jdbcType="VARCHAR" property="cellUrl1" />
+    <result column="cellTitle2" jdbcType="VARCHAR" property="cellTitle2" />
+    <result column="cellUrl2" jdbcType="VARCHAR" property="cellUrl2" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="syncStatus" jdbcType="VARCHAR" property="syncStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wxPageId, themeId, pageTitle, bannerPicUrl, address, servicePhone, bizDescription, 
+    supportBuyForSelf, needReceipt, cellTitle1, cellUrl1, cellTitle2, cellUrl2, status, 
+    syncStatus, lifeStatus, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample">
+    delete from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page (id, wxPageId, themeId, 
+      pageTitle, bannerPicUrl, address, 
+      servicePhone, bizDescription, supportBuyForSelf, 
+      needReceipt, cellTitle1, cellUrl1, 
+      cellTitle2, cellUrl2, status, 
+      syncStatus, lifeStatus, createTime, 
+      lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{wxPageId,jdbcType=VARCHAR}, #{themeId,jdbcType=BIGINT}, 
+      #{pageTitle,jdbcType=VARCHAR}, #{bannerPicUrl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{servicePhone,jdbcType=VARCHAR}, #{bizDescription,jdbcType=VARCHAR}, #{supportBuyForSelf,jdbcType=VARCHAR}, 
+      #{needReceipt,jdbcType=VARCHAR}, #{cellTitle1,jdbcType=VARCHAR}, #{cellUrl1,jdbcType=VARCHAR}, 
+      #{cellTitle2,jdbcType=VARCHAR}, #{cellUrl2,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{syncStatus,jdbcType=VARCHAR}, #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    insert into gcard_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxPageId != null">
+        wxPageId,
+      </if>
+      <if test="themeId != null">
+        themeId,
+      </if>
+      <if test="pageTitle != null">
+        pageTitle,
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="servicePhone != null">
+        servicePhone,
+      </if>
+      <if test="bizDescription != null">
+        bizDescription,
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf,
+      </if>
+      <if test="needReceipt != null">
+        needReceipt,
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1,
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1,
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2,
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="syncStatus != null">
+        syncStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxPageId != null">
+        #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPageExample" resultType="java.lang.Integer">
+    select count(*) from gcard_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wxPageId != null">
+        wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeId != null">
+        themeId = #{record.themeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pageTitle != null">
+        pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerPicUrl != null">
+        bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePhone != null">
+        servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizDescription != null">
+        bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supportBuyForSelf != null">
+        supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needReceipt != null">
+        needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle1 != null">
+        cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl1 != null">
+        cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellTitle2 != null">
+        cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cellUrl2 != null">
+        cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncStatus != null">
+        syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_page
+    set id = #{record.id,jdbcType=BIGINT},
+      wxPageId = #{record.wxPageId,jdbcType=VARCHAR},
+      themeId = #{record.themeId,jdbcType=BIGINT},
+      pageTitle = #{record.pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{record.bannerPicUrl,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      servicePhone = #{record.servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{record.bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{record.supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{record.needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{record.cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{record.cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{record.cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{record.cellUrl2,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      syncStatus = #{record.syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    <set>
+      <if test="wxPageId != null">
+        wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      </if>
+      <if test="themeId != null">
+        themeId = #{themeId,jdbcType=BIGINT},
+      </if>
+      <if test="pageTitle != null">
+        pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerPicUrl != null">
+        bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePhone != null">
+        servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bizDescription != null">
+        bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="supportBuyForSelf != null">
+        supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="needReceipt != null">
+        needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle1 != null">
+        cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl1 != null">
+        cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      </if>
+      <if test="cellTitle2 != null">
+        cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      </if>
+      <if test="cellUrl2 != null">
+        cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="syncStatus != null">
+        syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardPage">
+    update gcard_page
+    set wxPageId = #{wxPageId,jdbcType=VARCHAR},
+      themeId = #{themeId,jdbcType=BIGINT},
+      pageTitle = #{pageTitle,jdbcType=VARCHAR},
+      bannerPicUrl = #{bannerPicUrl,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      servicePhone = #{servicePhone,jdbcType=VARCHAR},
+      bizDescription = #{bizDescription,jdbcType=VARCHAR},
+      supportBuyForSelf = #{supportBuyForSelf,jdbcType=VARCHAR},
+      needReceipt = #{needReceipt,jdbcType=VARCHAR},
+      cellTitle1 = #{cellTitle1,jdbcType=VARCHAR},
+      cellUrl1 = #{cellUrl1,jdbcType=VARCHAR},
+      cellTitle2 = #{cellTitle2,jdbcType=VARCHAR},
+      cellUrl2 = #{cellUrl2,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      syncStatus = #{syncStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

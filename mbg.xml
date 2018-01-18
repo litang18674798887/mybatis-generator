@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!--  -->
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  
+   <commentGenerator type="com.pagoda.test.MyCommentGenerator">
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false" />
+        </commentGenerator>
+  
+  	<!-- 连接要逆向生成的目标数据库 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://192.168.1.31:3306/v2_pagoda_overall"
+        userId="ymt"
+        password="yimiaotong2015">
+    </jdbcConnection>
+
+	<!-- java类型解析器 -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!-- 配置javaBean生成后放在哪个地方 -->
+    <javaModelGenerator 
+    	targetPackage="com.pagoda.eshop.goods.entity.gcard" 
+    	targetProject=".\src">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+      <property name="useActualColumnNames" value="true" />
+    </javaModelGenerator>
+
+	<!-- 配置生成的xml映射文件存放在哪里 -->
+    <sqlMapGenerator 
+    	targetPackage="mappers.read.gcard"  
+    	targetProject=".\conf">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!--指定自动生成的接口存放在哪里  -->
+    <javaClientGenerator type="XMLMAPPER" 
+    	targetPackage="com.pagoda.eshop.goods.dao.gcard"  
+    	targetProject=".\src">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+	<!-- 指定要逆向生成的数据表 
+	tableName="tbl_emp"指定表名
+	 domainObjectName="Employee"；这个表对应的类名
+	-->
+    <table tableName="gcard" domainObjectName="Gcard">
+    	<property name="useActualColumnNames" value="true"/>
+    </table>
+	<table tableName="gcard_batch" domainObjectName="GcardBatch">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_category" domainObjectName="GcardCategory">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_code" domainObjectName="GcardCode">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_cover" domainObjectName="GcardCover">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_page" domainObjectName="GcardPage">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_page_category_rel" domainObjectName="GcardPageCategoryRel">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_page_snapshot_record" domainObjectName="GcardPageSnapshotRecord">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_theme" domainObjectName="GcardTheme">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_theme_card_rel" domainObjectName="GcardThemeCardRel">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_theme_category_rel" domainObjectName="GcardThemeCategoryRel">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_theme_cover_rel" domainObjectName="GcardThemeCoverRel">
+		<property name="useActualColumnNames" value="true"/>
+	</table>
+	<table tableName="gcard_transfer_record" domainObjectName="GcardTransferRecord">
+	
+	</table>
+	
+	
+	
+  </context>
+</generatorConfiguration>

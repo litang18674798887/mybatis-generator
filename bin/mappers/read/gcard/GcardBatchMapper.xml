@@ -1,0 +1,2798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pagoda.eshop.goods.dao.gcard.GcardBatchMapper">
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="hasUsed" jdbcType="INTEGER" property="hasUsed" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batchId, cardType, initBalance, initQuantity, hasUsed, createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample">
+    delete from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch (id, batchId, cardType, 
+      initBalance, initQuantity, hasUsed, 
+      createTime, lastUpdate)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{initBalance,jdbcType=INTEGER}, #{initQuantity,jdbcType=INTEGER}, #{hasUsed,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    insert into gcard_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="hasUsed != null">
+        hasUsed,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatchExample" resultType="java.lang.Integer">
+    select count(*) from gcard_batch
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard_batch
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasUsed != null">
+        hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard_batch
+    set id = #{record.id,jdbcType=BIGINT},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      hasUsed = #{record.hasUsed,jdbcType=INTEGER},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    <set>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="hasUsed != null">
+        hasUsed = #{hasUsed,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardBatch">
+    update gcard_batch
+    set batchId = #{batchId,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      hasUsed = #{hasUsed,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

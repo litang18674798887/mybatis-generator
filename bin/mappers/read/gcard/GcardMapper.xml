@@ -1,0 +1,4558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pagoda.eshop.goods.dao.gcard.GcardMapper">
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="wxCardId" jdbcType="VARCHAR" property="wxCardId" />
+    <result column="backgroundPicUrl" jdbcType="VARCHAR" property="backgroundPicUrl" />
+    <result column="picUrl" jdbcType="VARCHAR" property="picUrl" />
+    <result column="initBalance" jdbcType="INTEGER" property="initBalance" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="initQuantity" jdbcType="INTEGER" property="initQuantity" />
+    <result column="batchId" jdbcType="VARCHAR" property="batchId" />
+    <result column="cardCheckStatus" jdbcType="VARCHAR" property="cardCheckStatus" />
+    <result column="lifeStatus" jdbcType="VARCHAR" property="lifeStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastUpdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cardType, wxCardId, backgroundPicUrl, picUrl, initBalance, price, title, color, 
+    notice, description, quantity, initQuantity, batchId, cardCheckStatus, lifeStatus, 
+    createTime, lastUpdate
+  </sql>
+  <select id="selectByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gcard
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample">
+    delete from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard (id, cardType, wxCardId, 
+      backgroundPicUrl, picUrl, initBalance, 
+      price, title, color, 
+      notice, description, quantity, 
+      initQuantity, batchId, cardCheckStatus, 
+      lifeStatus, createTime, lastUpdate
+      )
+    values (#{id,jdbcType=BIGINT}, #{cardType,jdbcType=VARCHAR}, #{wxCardId,jdbcType=VARCHAR}, 
+      #{backgroundPicUrl,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{initBalance,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{notice,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{initQuantity,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{cardCheckStatus,jdbcType=VARCHAR}, 
+      #{lifeStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    insert into gcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="wxCardId != null">
+        wxCardId,
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl,
+      </if>
+      <if test="picUrl != null">
+        picUrl,
+      </if>
+      <if test="initBalance != null">
+        initBalance,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="initQuantity != null">
+        initQuantity,
+      </if>
+      <if test="batchId != null">
+        batchId,
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus,
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pagoda.eshop.goods.entity.gcard.GcardExample" resultType="java.lang.Integer">
+    select count(*) from gcard
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gcard
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxCardId != null">
+        wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundPicUrl != null">
+        backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picUrl != null">
+        picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initBalance != null">
+        initBalance = #{record.initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice != null">
+        notice = #{record.notice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.initQuantity != null">
+        initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batchId = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardCheckStatus != null">
+        cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lifeStatus != null">
+        lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdate != null">
+        lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gcard
+    set id = #{record.id,jdbcType=BIGINT},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      wxCardId = #{record.wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{record.backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{record.picUrl,jdbcType=VARCHAR},
+      initBalance = #{record.initBalance,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      notice = #{record.notice,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      initQuantity = #{record.initQuantity,jdbcType=INTEGER},
+      batchId = #{record.batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{record.cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{record.lifeStatus,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{record.lastUpdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    <set>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="wxCardId != null">
+        wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundPicUrl != null">
+        backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        picUrl = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="initBalance != null">
+        initBalance = #{initBalance,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="initQuantity != null">
+        initQuantity = #{initQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        batchId = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCheckStatus != null">
+        cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeStatus != null">
+        lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdate != null">
+        lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pagoda.eshop.goods.entity.gcard.Gcard">
+    update gcard
+    set cardType = #{cardType,jdbcType=VARCHAR},
+      wxCardId = #{wxCardId,jdbcType=VARCHAR},
+      backgroundPicUrl = #{backgroundPicUrl,jdbcType=VARCHAR},
+      picUrl = #{picUrl,jdbcType=VARCHAR},
+      initBalance = #{initBalance,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      initQuantity = #{initQuantity,jdbcType=INTEGER},
+      batchId = #{batchId,jdbcType=VARCHAR},
+      cardCheckStatus = #{cardCheckStatus,jdbcType=VARCHAR},
+      lifeStatus = #{lifeStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
